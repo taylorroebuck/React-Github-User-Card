@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 import './App.css';
 import UserCard from './Components/UserCard';
 
@@ -6,50 +7,58 @@ class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      user: "taylorroebuck",
-      users: [""]
+      userName: 'taylorroebuck',
+      user: {},
+      followers: []
     };
   }
 
-  componentDidMount(){
-    fetch(`https://avatars1.githubusercontent.com/${this.state.user}`)
-      .then(res => {
-        console.log("tr: App.js: CDM: fetch: then: users: ", res);
-        return res.json;
-      })
-      .then(res => {
-        this.setState({ users: [res] })
-      })
-      .catch(err => console.log(err));
+  changeUserName = (userName) => {
+    this.setState({ userName })
+  }
 
-      fetch(`https://api.github.com/users/${this.state.user}/followers`)
-        .then(res => {
-          console.log("tr: App.js: CDM: fetch: then3: followers: ", res)
-          return res.json();
-        })
-        .then(res => {
-          console.log("tr: App.js: CDM: fetch: then4: followers: ", res)
-          this.setState({ users: [...this.state.users, ...res] });
-        })
-        .catch(err => console.log(err));
+  componentDidMount() {
+    this.usersGet();
+    this.usersFollowers();
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    console.log("CDU", this.state)
+    if(prevState.userName !== this.state.userName) {
+      console.log(prevState.userName)
+      this.usersGet();
+      this.usersFollowers();
+    
+    }
+  }
+
+  usersGet = () => {
+    axios
+      .get('https://api.github.com/users/taylorroebuck')
+      .then(res => {
+        console.log(res);
+        this.setState({ user: res.data });
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  };
+
+  usersFollowers = () => {
+    axios
+    .get(`https://api.github.com/users/taylorroebuck/followers`)
+    .then(res => {  console.log(res.data);
+      this.setState({ followers: res.data });
+    });
   };
 
   render() {
-  return (
-    <div className="App">
-      <header>
-        <h1>{this.state.user}'s GitHub</h1>
-      </header>
-      
-     <div>
-       {this.state.users.map(user => {
-         return <UserCard key={user.id} user={user} />
-       })}
-     </div>
-    </div>
-  );
+    return (
+      <div className='App'>
+        <UserCard user={this.state.user} followers={this.state.followers} />
+      </div>
+    );
+  }
 }
-}
-
 
 export default App;
