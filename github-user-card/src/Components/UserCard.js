@@ -1,40 +1,25 @@
 import React from 'react';
 import UserList from './FollowerList';
-import styled from 'styled-components';
-
-const List=styled.div`
-  display: flex;
-  width: 100%;
-  flex-direction: column;
-`
-
-const Image=styled.img`
-  display: flex;
-  display: block;
-  align-content: center;
-  height: 300px;
-  width: 300px;
-`
-const Heading=styled.h3`
-    padding-left:315px;
-    margin:10px;
-`
+import { Card, CardHeader, CardTitle, CardImg, CardBody } from 'shards-react';
+import '../App.css';
 
 const UserCard = props => {
   console.log('UserCard Props', props);
   return (
-    <div>
       <div>
-        <List>
-          <Image src={props.user.avatar_url} />
-          <Heading>Username: {props.user.login}</Heading>
-          <Heading>Location: {props.user.location}</Heading>
-          <Heading>Following: {props.user.following}</Heading>
-          <Heading>Followers: {props.user.followers}</Heading>
-        </List>
+        <Card className="userCard" style={{width: '250px', display: 'flex', alignItems: 'center', alignContent: 'center', padding: '5%', flexDirection: 'column', marginLeft: '38%'}}>
+            <CardHeader>
+                <CardTitle style={{color: '#ff6f69', background:'#ffeead'}}>{props.user.login}'s GitHub</CardTitle>
+            </CardHeader>
+            <CardImg src={props.user.avatar_url} />
+            <CardBody className="userCard-body" style={{color: '#ffeead', marginTop: '2%'}}>
+                <div className="cardBody">
+                    <p>{props.user.bio}</p>
+                </div>
+            </CardBody>
+        </Card>
 
         <UserList user={props.user} followers={props.followers} />
-      </div>
     </div>
   );
 };

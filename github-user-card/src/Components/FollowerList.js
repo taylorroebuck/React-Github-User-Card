@@ -1,41 +1,20 @@
 import React from 'react';
-import styled from 'styled-components';
-
-const List=styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-  height: auto;
-  background: pink;
-`
-
-const Image=styled.img`
-  height: auto;
-  width: auto;
-`
-
-const Card=styled.div`
-  width:250px;
-  height:400px;
-  display:flex;
-`
-
+import { Card, CardHeader, CardTitle, CardImg, CardBody } from 'shards-react';
 
 const UserList = props => {
   console.log('UserList', props);
   return (
     <div>
-      <List>
+      <Card>
         {props.followers.map((follower, id) => (
           <div key={id}>
-            <Card>
-              <Image src={follower.avatar_url} />
-              <h3>User Login: {follower.login}</h3>
-            </Card>
+            <CardHeader>
+              <CardImg src={follower.avatar_url} />
+              <CardTitle>User Login: {follower.login} </CardTitle>
+            </CardHeader>
           </div>
         ))}
-      </List>
+      </Card>
     </div>
   );
 };

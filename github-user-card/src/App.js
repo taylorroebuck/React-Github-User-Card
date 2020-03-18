@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import './App.css';
 import UserCard from './Components/UserCard';
+import { CardDeck } from 'shards-react';
 
 class App extends React.Component {
   constructor() {
@@ -55,7 +56,9 @@ class App extends React.Component {
   render() {
     return (
       <div className='App'>
-        <UserCard user={this.state.user} followers={this.state.followers} />
+        <CardDeck>
+          <UserCard user={this.state.user} followers={this.state.followers} />
+        </CardDeck>
       </div>
     );
   }
