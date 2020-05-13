@@ -10,3 +10,12 @@ h1 {
 .App {
   align-content: center;
 }
+
+.followers {
+  align-content: center;
+  margin-left: 36%;
+}
+
+p {
+  text-align: center;
+}
