@@ -15,7 +15,10 @@ const UserCard = props => {
               <CardBody className="userCard-body" style={{color: '#ffeead', marginTop: '2%'}}>
                   <div className="cardBody">
                       <p>{props.user.bio}</p>
+                      <p>Followers: {props.user.followers}</p>
+                      <p>Repos: {props.user.public_repos}</p>
                   </div>
+                  <CardTitle style={{textAlign: 'center', color: '#ffe027'}}>{props.user.name}'s Contributions:</CardTitle>
                   <CardImg src="http://ghchart.rshah.org/taylorroebuck" alt="taylorroebuck's Github chart" />
               </CardBody>
           </Card>
