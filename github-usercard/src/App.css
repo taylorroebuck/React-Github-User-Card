@@ -1,0 +1,21 @@
+* {
+  background-color: #000000;
+  color: #ff4e4e;
+}
+
+h1 {
+  text-align: center;
+}
+
+.App {
+  align-content: center;
+}
+
+.followers {
+  align-content: center;
+  margin-left: 36%;
+}
+
+p {
+  text-align: center;
+}
